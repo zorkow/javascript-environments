@@ -6,7 +6,7 @@ inside Emacs.
 
 Install as a node module using npm:
 
-     npm install speech-rule-engine
+     npm install tslint-unix-formatter
 
 
 To use inside Emacs include the following code in your .emacs file.
