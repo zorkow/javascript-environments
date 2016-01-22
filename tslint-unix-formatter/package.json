@@ -1,6 +1,6 @@
 {
   "name": "tslint-unix-formatter",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A formatter with error output in UNIX style for tslint.",
   "scripts": {
     "prepublish": "tsc"
