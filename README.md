@@ -1,59 +1,62 @@
 # javascript-environments
 Environments for working with JavaScript and some of its libraries.
 
-* How to install a js2 environment:
+## How to install a js2 environment:
 
-** Emacs packages:
+### Emacs packages:
 
-   js2-mode
-   closure-glslint
+     js2-mode
+     closure-glslint
 
-** Linters:
+### Linters:
 
-*** gjslint
-    Either installed via apt-get or npm.
+#### gjslint
 
-* How to install a nodejs environment:
+Either installed via apt-get or npm.
 
-  Install the js2 environment.
+## How to install a nodejs environment:
 
-** Emacs packages:
+Install the js2 environment.
+
+### Emacs packages:
    
-   js-comint
+     js-comint
 
-** Node
+### Node
 
-   Either installed with nvm or apt-get
-
-
-* How to install a typescript environment:
-
-** Node packages:
-
-   sudo npm -g install typescript
-   sudo npm -g install typescript-tools
+Either installed with nvm or apt-get
 
 
-   This one seems to be pointless.
-   sudo npm -g install typescript-formatter
+## How to install a typescript environment:
+
+### Node packages:
+
+     sudo npm -g install typescript
+     sudo npm -g install typescript-tools
+
+
+   Possibly also:
+
+     sudo npm -g install typescript-formatter
 
 
 
-** Emacs packages:
+### Emacs packages:
 
-   flycheck-typescript-tslint
-   tide
-   tss
-   typescript
-   typescript-mode
+     flycheck-typescript-tslint
+     tide
+     tss
+     typescript
+     typescript-mode
 
-** Emacs integration: 
+### Emacs integration: 
    
    
 
-** Directory Structure:
-   project_root/
-   project_root/tsconfig.json
+### Directory Structure:
+
+    project_root/
+    project_root/tsconfig.json
      /scripts
        /ts
        /js
@@ -62,48 +65,54 @@ Environments for working with JavaScript and some of its libraries.
        /js
        /doc
 
-** Making a tsconfig.json file:
-   https://basarat.gitbooks.io/typescript/content/docs/project/tsconfig.html
-   http://techiejs.com/Blog/Post/Leveraging-tsconfigjson-in-TypeScript-projects
-   https://github.com/Microsoft/TypeScript/wiki/tsconfig.json
+### Making a tsconfig.json file:
 
-   Very basic for the above structure:
+https://basarat.gitbooks.io/typescript/content/docs/project/tsconfig.html
 
-   {
-    "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
-        "declaration": false,
-        "noImplicitAny": false,
-        "removeComments": true,
-        "noLib": false,
-        "outDir": "scripts/js"
-      }
-   }
+http://techiejs.com/Blog/Post/Leveraging-tsconfigjson-in-TypeScript-projects
 
-** Linting
+https://github.com/Microsoft/TypeScript/wiki/tsconfig.json
 
-*** tslint with standard unix formatter
+Very basic for the above structure:
+
+     {
+      "compilerOptions": {
+         "target": "es5",
+         "module": "commonjs",
+         "declaration": false,
+         "noImplicitAny": false,
+         "removeComments": true,
+         "noLib": false,
+         "outDir": "scripts/js"
+       }
+    }
+
+### Linting
+
+#### tslint with standard unix formatter
 
     sudo npm -g install tslint
    
 
-*** Setup and edit a tslint.json file for configuration.
+#### Setup and edit a tslint.json file for configuration.
    
 
-*** gjslint
+#### gjslint
     One can also use gjslint as this offers the fixjsstyle option. 
     
     sudo npm -g install gjslint
     apt-get install closure-linter
 
 
-** Conventions
+### Conventions
 
-*** General Conventions:
-    https://github.com/Platypi/style_typescript
-*** Naming conventions: 
-    https://gist.github.com/aleksey-bykov/34599f736d745fee7136
-*** Commenting conventions:
-    JS Doc style
-    http://usejsdoc.org/
+#### General Conventions:
+https://github.com/Platypi/style_typescript
+
+#### Naming conventions: 
+https://gist.github.com/aleksey-bykov/34599f736d745fee7136
+
+#### Commenting conventions:
+
+JS Doc style
+http://usejsdoc.org/
