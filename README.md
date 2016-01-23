@@ -98,7 +98,8 @@ Very basic for the above structure:
    
 
 #### gjslint
-    One can also use gjslint as this offers the fixjsstyle option. 
+
+One can also use gjslint as this offers the fixjsstyle option. 
     
     sudo npm -g install gjslint
     apt-get install closure-linter
