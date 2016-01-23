@@ -92,7 +92,11 @@ Very basic for the above structure:
 #### tslint with standard unix formatter
 
     sudo npm -g install tslint
-   
+    npm install tslint-unix-formatter
+
+Calls to the linter should then be made with:
+
+    tslint -t unix -s ~/node_modules/tslint-unix-formatter/lib/
 
 #### Setup and edit a tslint.json file for configuration.
    
