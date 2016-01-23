@@ -102,7 +102,8 @@ Calls to the linter should then be made with:
    
 
 #### gjslint
-    One can also use gjslint as this offers the fixjsstyle option. 
+
+One can also use gjslint as this offers the fixjsstyle option. 
     
     sudo npm -g install gjslint
     apt-get install closure-linter
