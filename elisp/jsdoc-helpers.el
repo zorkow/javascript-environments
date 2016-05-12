@@ -1,70 +1,74 @@
-;; Copyright (C) 2015, 2016 Volker Sorge <volker.sorge@gmail.com>
+;; Copyright (C) 2015, 2016 The MathJax Consortium
 
-;; Author: Volker Sorge <volker.sorge@gmail.com>
+;; Author: Volker Sorge <v.sorge@mathjax.org>
 
-;; This file is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
-;; any later version.
-
-;; This file is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
-
-;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to
-;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;;  Licensed under the Apache License, Version 2.0 (the "License");
+;;  you may not use this file except in compliance with the License.
+;;  You may obtain a copy of the License at
+;; 
+;;      http://www.apache.org/licenses/LICENSE-2.0
+;; 
+;;  Unless required by applicable law or agreed to in writing, software
+;;  distributed under the License is distributed on an "AS IS" BASIS,
+;;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+;;  See the License for the specific language governing permissions and
+;;  limitations under the License.
 
 ;; 
 ;; Helper functions for JSDoc. Works in js2-mode.
 ;;
 
+
+(defun jsdoc-mode-indent-region (height down back)
+  (let ((end (cadr (posn-at-point))))
+    (beginning-of-line)
+    (previous-line height)
+    (indent-region (cadr (posn-at-point)) end)
+    (next-line down)
+    (end-of-line)
+    (backward-char back)
+    )
+  )
+
+
 (defun jsdoc-mode-multi-comment ()
   (interactive)
   (insert "\n/**\n *  \n *\n *\n */\n")
-  (previous-line 4)
-  (forward-char 3)
+  (jsdoc-mode-indent-region 5 1 0)
 )
 
 
 (defun jsdoc-mode-function-comment ()
   (interactive)
   (insert "\n/**\n * \n * @param {}\n * @return {}\n */\n")
-  (previous-line 4)
-  (forward-char 3)
-)
+  (jsdoc-mode-indent-region 5 1 0))
 
 
 (defun jsdoc-mode-constructor-comment ()
   (interactive)
   (insert "\n/**\n * @constructor\n * @extends {}\n */\n")
-  (previous-line 2)
-  (forward-char 13)
+  (jsdoc-mode-indent-region 4 2 1)
 )
 
 
 (defun jsdoc-mode-override-comment ()
   (interactive)
   (insert "\n/**\n * @override\n */\n")
+  (jsdoc-mode-indent-region 3 3 0)
+  (indent-for-tab-command)
 )
 
 (defun jsdoc-mode-type-comment ()
   (interactive)
   (insert "\n/**\n * @type {}\n */\n")
-  (previous-line 1)
-  (indent-for-tab-command)
-  (previous-line 1)
-  (indent-for-tab-command)
-  (previous-line 1)
-  (indent-for-tab-command)
+  (jsdoc-mode-indent-region 3 1 1)
 )
 
 (defun jsdoc-mode-add-parameter-comment ()
   (interactive)
   (end-of-line)
   (insert "\n * @param {}")
+  (indent-for-tab-command)
   (backward-char 1)
   )
 
@@ -96,7 +100,7 @@
   (interactive)
   (jsdoc-goto-long-line 80)
   (forward-char 76)
-  (search-backward " ")
+  (search-backward-regexp "[ |<]")
   (js2-line-break)
   (jsdoc-mode-rewrite-string-line-break)
   (previous-line 1)
@@ -130,7 +134,7 @@ Plain `C-u' (no number) uses `fill-column' as LEN."
   (local-set-key "\C-c:" 'uncomment-region)
 
   (local-set-key "\C-cr" 'jsdoc-mode-rewrite-string-line-break)
-  (local-set-key "\C-c\C-c" 'jsdoc-mode-multi-comment)
+  (local-set-key "\C-ce" 'jsdoc-mode-multi-comment)
   (local-set-key "\C-cf" 'jsdoc-mode-function-comment)
   (local-set-key "\C-cc" 'jsdoc-mode-constructor-comment)
   (local-set-key "\C-co" 'jsdoc-mode-override-comment)
