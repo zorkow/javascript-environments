@@ -58,8 +58,43 @@
 
 (defun typescript-compile ()
   (interactive)
-  (compile (format "tsc | sed -e 's/\(/:/' -e 's/,/:/' -e 's/\)//'") nil)
+  (let ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json")))
+    (if dir 
+        (compile (format "cd %s; tsc | sed -e 's/\(/:/' -e 's/,/:/' -e 's/\)//'; cd -" dir) nil)
+      (compile (format "tsc | sed -e 's/\(/:/' -e 's/,/:/' -e 's/\)//'") nil)
+      )))
+
+(defun typescript-compile-go-node ()
+  (interactive)
+  (typescript-compile)
+  (typescript-go-node)
   )
+
+;TODO: This really should also automatically load the js file.
+(defun typescript-go-node ()
+  (interactive)
+  (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json"))
+         (file (find-file (concat dir "/" "tsconfig.json")))
+         (json (jsons-parse))
+         (out (typescript-get-out-file json)))
+    (kill-buffer)
+    (print out)
+    (when out
+      (comint-send-string inferior-js-buffer
+                          (concat ".load " dir "/" out "\n")))
+    (run-js inferior-js-program-command nil)
+    ))
+
+
+(defun typescript-get-out-file (json)
+  (when json
+    (let ((compilerOptions (gethash "\"compilerOptions\"" (cadr json))))
+      (when compilerOptions
+        (let ((out (gethash "\"out\"" (cadr compilerOptions))))
+          (when out
+            (let ((str (cadr out)))
+              (subseq str 1 (1- (length str))))))))))
+
 
 (defun jslint-typescript-buffer ()
   (interactive)
@@ -68,5 +103,7 @@
 
 (defun typescript-local-mode-map ()
   (local-set-key "\C-c\C-c" 'typescript-compile)
+  ;;(local-set-key "\C-c\C-v" 'typescript-compile-go-node)
+  (local-set-key "\C-c\C-v" 'typescript-go-node)
   )
 
