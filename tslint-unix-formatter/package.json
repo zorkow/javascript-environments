@@ -1,9 +1,9 @@
 {
   "name": "tslint-unix-formatter",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A formatter with error output in UNIX style for tslint.",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublish": "tsc; sed -i s/\"\\/home\\/sorge\\/node_modules\"/\"..\\/..\"/ lib/unixFormatter.js"
   },
   "maintainers": [
     "Volker Sorge <Volker.Sorge@gmail.com> (http://www.cs.bham.ac.uk/~vxs)"
