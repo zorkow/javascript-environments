@@ -73,15 +73,15 @@
 ;TODO: This really should also automatically load the js file.
 (defun typescript-go-node ()
   (interactive)
-  (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json"))
-         (file (find-file (concat dir "/" "tsconfig.json")))
+  (let* ((dir (file-truename
+               (locate-dominating-file (buffer-file-name) "tsconfig.json")))
+         (file (find-file (concat dir "tsconfig.json")))
          (json (jsons-parse))
          (out (typescript-get-out-file json)))
     (kill-buffer)
-    (print out)
     (when out
       (comint-send-string inferior-js-buffer
-                          (concat ".load " dir "/" out "\n")))
+                          (concat ".load " (file-truename dir) out "\n")))
     (run-js inferior-js-program-command nil)
     ))
 
