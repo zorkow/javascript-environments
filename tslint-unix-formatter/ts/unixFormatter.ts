@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import * as Lint from "/home/sorge/node_modules/tslint/lib/lint";
+import * as Lint from '/usr/lib/node_modules/tslint/lib/lint';
 
 export class Formatter extends Lint.Formatters.AbstractFormatter {
     public format(failures: Lint.RuleFailure[]): string {

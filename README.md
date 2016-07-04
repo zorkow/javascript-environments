@@ -51,7 +51,9 @@ Either installed with nvm or apt-get
 
 ### Emacs integration: 
    
-   
+     (setq load-path (cons YOUR_LOCAL_PATH_TO_ELISP_DIR load-path))
+     (load-library "js2-local")
+     (load-library "typescript-local")
 
 ### Directory Structure:
 
