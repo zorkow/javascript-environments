@@ -56,6 +56,12 @@
   (compile (format "tslint -t unix -s ~/node_modules/tslint-unix-formatter/lib/ %s" (buffer-file-name)) nil)
   )
 
+(defun tslint-package ()
+  (interactive)
+  (let ((src-directory (file-name-directory (buffer-file-name))))
+    (compile (format "tslint -t unix -s ~/node_modules/tslint-unix-formatter/lib/ %s/*.ts" src-directory) nil)
+    ))
+
 (defun typescript-compile ()
   (interactive)
   (let ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json")))
