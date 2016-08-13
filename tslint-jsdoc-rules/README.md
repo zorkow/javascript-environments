@@ -13,13 +13,13 @@ compilers like Google's closure.
 
 Other arguments may be optionally provided:
 
-* \`"no-methods"\` excludes JSDoc comments on interface specifications and class methods
-* \`"no-constructors"\` excludes JSDoc comments on class constructors
-* \`"no-properties"\` excludes JSDoc comments on class properties
-* \`"no-functions"\` excludes JSDoc comments on all functions
-* \`"no-protected"\` excludes JSDoc comments on protected elements
-* \`"no-private"\` excludes JSDoc comments on private elements
-* \`"no-private-properties"\` excludes private properties from enforcing JSDoc comments.
+* `"no-methods"` excludes JSDoc comments on interface specifications and class methods
+* `"no-constructors"` excludes JSDoc comments on class constructors
+* `"no-properties"` excludes JSDoc comments on class properties
+* `"no-functions"` excludes JSDoc comments on all functions
+* `"no-protected"` excludes JSDoc comments on protected elements
+* `"no-private"` excludes JSDoc comments on private elements
+* `"no-private-properties"` excludes private properties from enforcing JSDoc comments.
 
 
 Install as a node module using npm:
