@@ -1,0 +1,38 @@
+{
+  "name": "tslint-jsdoc-rules",
+  "version": "0.1.0",
+  "description": "Rules for tslint to enforce JSDoc in sources.",
+  "scripts": {
+    "prepublish": "tsc"
+  },
+  "maintainers": [
+    "Volker Sorge <Volker.Sorge@gmail.com> (http://www.cs.bham.ac.uk/~vxs)"
+  ],
+  "bugs": {
+    "email": "volker.sorge@gmail.com",
+    "url": "https://github.com/zorkow/javascript-environments/issues"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules"
+  },
+  "keywords": [
+    "tslint",
+    "formatter"
+  ],
+  "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
+  "dependencies": {
+    "tslint": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^1.8.0",
+    "tslint": "^3.0.0"
+  },
+  "files": [
+      "LICENSE",
+      "README.md",
+      "lib/"
+  ],
+  "main": "lib/index.js"
+}
