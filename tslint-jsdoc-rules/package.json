@@ -23,11 +23,11 @@
   ],
   "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
   "dependencies": {
-    "tslint": "^3.0.0"
+    "tslint": "^3.2.2"
   },
   "devDependencies": {
-    "typescript": "^1.8.0",
-    "tslint": "^3.0.0"
+    "typescript": "^1.7.5",
+    "tslint": "^3.2.2"
   },
   "files": [
       "LICENSE",
