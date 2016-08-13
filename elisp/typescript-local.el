@@ -53,7 +53,7 @@
 (defconst tslint-binary "tslint")
 (defconst tslint-options (concat " -t unix"
                                  " -s ~/node_modules/tslint-unix-formatter/lib"
-                                 " -r ~/git/javascript-environments/tslint-jsdoc-rules/lib"))
+                                 " -r ~/node_modules/tslint-jsdoc-rules/lib"))
 
 
 (defun tslint-buffer ()
