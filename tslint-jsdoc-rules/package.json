@@ -1,6 +1,6 @@
 {
   "name": "tslint-jsdoc-rules",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Rules for tslint to enforce JSDoc in sources.",
   "scripts": {
     "prepublish": "tsc"
@@ -19,7 +19,8 @@
   },
   "keywords": [
     "tslint",
-    "formatter"
+    "rules",
+    "jsdoc"
   ],
   "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
   "dependencies": {
@@ -34,5 +35,5 @@
       "README.md",
       "lib/"
   ],
-  "main": "lib/index.js"
+  "main": "lib/jsdocRequireRule.js"
 }
