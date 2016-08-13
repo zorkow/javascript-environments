@@ -3,7 +3,7 @@
   "version": "0.1.4",
   "description": "A formatter with error output in UNIX style for tslint.",
   "scripts": {
-    "prepublish": "tsc; sed -i s/\"\\/home\\/sorge\\/node_modules\"/\"..\\/..\"/ lib/unixFormatter.js"
+    "prepublish": "tsc"
   },
   "maintainers": [
     "Volker Sorge <Volker.Sorge@gmail.com> (http://www.cs.bham.ac.uk/~vxs)"

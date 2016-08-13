@@ -50,16 +50,21 @@
               (node-js-local-mode-map)
               ))
 
+(defconst tslint-binary "tslint")
+(defconst tslint-options (concat " -t unix"
+                                 " -s ~/node_modules/tslint-unix-formatter/lib"
+                                 " -r ~/git/javascript-environments/tslint-jsdoc-rules/lib"))
+
 
 (defun tslint-buffer ()
   (interactive)
-  (compile (format "tslint -t unix -s ~/node_modules/tslint-unix-formatter/lib/ %s" (buffer-file-name)) nil)
+  (compile (format "%s %s %s" tslint-binary tslint-options (buffer-file-name)) nil)
   )
 
 (defun tslint-package ()
   (interactive)
   (let ((src-directory (file-name-directory (buffer-file-name))))
-    (compile (format "tslint -t unix -s ~/node_modules/tslint-unix-formatter/lib/ %s/*.ts" src-directory) nil)
+    (compile (format "%s %s %s/*.ts" tslint-binary tslint-options src-directory) nil)
     ))
 
 (defun typescript-compile ()
