@@ -23,8 +23,10 @@ export class Rule extends Lint.Rules.AbstractRule {
     /* tslint:disable:object-literal-sort-keys */
     public static metadata: Lint.IRuleMetadata = {
         ruleName: "jsdoc-require",
-        description: "Requires explicit visibility declarations for class members.",
-        rationale: "Explicit visibility declarations can make code more readable and accessible for those new to TS.",
+        description: "Requires JSDoc comments for class members, interfaces and functions.",
+        rationale: "Making sure that all code elements are well documented improves code" +
+        " readability. It also helps with JSDoc generation as well as transpilation" +
+        " to compilers like Google's closure.",
         optionsDescription: Lint.Utils.dedent`
               Two arguments may be optionally provided:
             * \`"no-methods"\` excludes JSDoc comments on interface specifications and class methods

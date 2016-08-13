@@ -1,8 +1,26 @@
-# UNIX Style Formatter for tslint Output
+# Enforce JSDoc comments via tslint
 
-A simple formatter that produces error output in Unix style. This is similar to
-the --unix_mode option of gjslint. The mode is particularly useful for running
-inside Emacs.
+A rule set for [tslint](https://github.com/palantir/tslint) that enfoces JSDoc
+comments on typescript code.
+
+Making sure that all code elements are well documented improves code
+readability. It also helps with JSDoc generation as well as transpilation to
+compilers like Google's closure.
+
+    "jsdoc-require": [
+      true
+    ],
+
+Other arguments may be optionally provided:
+
+* \`"no-methods"\` excludes JSDoc comments on interface specifications and class methods
+* \`"no-constructors"\` excludes JSDoc comments on class constructors
+* \`"no-properties"\` excludes JSDoc comments on class properties
+* \`"no-functions"\` excludes JSDoc comments on all functions
+* \`"no-protected"\` excludes JSDoc comments on protected elements
+* \`"no-private"\` excludes JSDoc comments on private elements
+* \`"no-private-properties"\` excludes private properties from enforcing JSDoc comments.
+
 
 Install as a node module using npm:
 
