@@ -1,7 +1,7 @@
 {
-  "name": "tslint-unix-formatter",
-  "version": "0.1.5",
-  "description": "A formatter with error output in UNIX style for tslint.",
+  "name": "tslint-jsdoc-rules",
+  "version": "0.1.1",
+  "description": "Rules for tslint to enforce JSDoc in sources.",
   "scripts": {
     "prepublish": "tsc"
   },
@@ -15,13 +15,14 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zorkow/javascript-environments/tslint-unix-formatter"
+    "url": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules"
   },
   "keywords": [
     "tslint",
-    "formatter"
+    "rules",
+    "jsdoc"
   ],
-  "homepage": "https://github.com/zorkow/javascript-environments/tslint-unix-formatter",
+  "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
   "dependencies": {
     "tslint": "^3.2.2"
   },
@@ -34,5 +35,5 @@
       "README.md",
       "lib/"
   ],
-  "main": "lib/index.js"
+  "main": "lib/jsdocRequireRule.js"
 }
