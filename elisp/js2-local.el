@@ -48,5 +48,6 @@
   (compile (format "gjslint --unix_mode --strict --jsdoc %s" (buffer-file-name)) nil)
   )
 
+(setq js-indent-level 2)
 
 (load-library "closure-glslint")
