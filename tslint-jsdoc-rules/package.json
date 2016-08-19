@@ -1,6 +1,6 @@
 {
   "name": "tslint-jsdoc-rules",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Rules for tslint to enforce JSDoc in sources.",
   "scripts": {
     "prepublish": "tsc"
