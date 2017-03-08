@@ -52,7 +52,7 @@ export class Rule extends Lint.Rules.AbstractRule {
 
     public static FAILURE_STRING_FACTORY = (memberType: string, memberName: string) => {
       memberName = memberName == null ? "" : ` '${memberName}'`;
-      return `Missing JSDoc element for ${memberType}${memberName}'`;
+      return `Missing JSDoc element for ${memberType}${memberName}`;
     }
 
     public apply(sourceFile: ts.SourceFile): Lint.RuleFailure[] {
