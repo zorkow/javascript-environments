@@ -22,6 +22,7 @@
 ;;(setenv "NODE_NO_READLINE" "1")
 ;;(setq inferior-js-program-command "node --interactive")
 (setq inferior-js-program-command "node")
+(setq js-comint-buffer "js")
 
 ;; (fset 'screen-width #'frame-width)
 
@@ -35,12 +36,26 @@
          (lambda (output)
            (replace-regexp-in-string "\033\\[[0-9]+[A-Z]" "" output)))))
 
+(defun js-send-last-sexp-and-go ()
+  "Send the previous sexp and go to the inferior Javascript process."
+  (interactive)
+  (js-comint-send-last-sexp)
+  (switch-to-js)
+  )
+
+(defun js-send-buffer-and-go ()
+  "Send the buffer and go to the inferior Javascript process."
+  (interactive)
+  (js-comint-send-buffer)
+  (switch-to-js)
+  )
+
 (defun node-js-local-mode-map ()
   (local-set-key "\C-x\C-e" 'js-send-last-sexp)
   (local-set-key "\C-\M-x" 'js-send-last-sexp-and-go)
   (local-set-key "\C-cb" 'js-send-buffer)
   (local-set-key "\C-c\C-b" 'js-send-buffer-and-go)
-  (local-set-key "\C-cl" 'js-load-file-and-go)
+  (local-set-key "\C-cl" 'js-load-file)
   )
 
 (defun node-js-eval-region-or-buffer ()
