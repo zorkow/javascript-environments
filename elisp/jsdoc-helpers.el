@@ -81,6 +81,19 @@
   (backward-char 2)
   )
 
+(setq jsdoc-mode-case-log-counter 0)
+
+(defun jsdoc-mode-add-case-log ()
+  (interactive)
+  (beginning-of-line)
+  (open-line 1)
+  (insert (format "console.log(%s);" jsdoc-mode-case-log-counter))
+  (incf jsdoc-mode-case-log-counter)
+  (indent-for-tab-command)
+  (forward-line 1)
+  (indent-for-tab-command)
+  )
+
 (defun jsdoc-mode-rewrite-string-line-break ()
   (interactive)
   (beginning-of-line)
@@ -142,6 +155,7 @@ Plain `C-u' (no number) uses `fill-column' as LEN."
   (local-set-key "\M-\r" 'jsdoc-mode-add-parameter-comment)
   (local-set-key [C-return] 'js2-line-break)
   (local-set-key "\C-c\C-d" 'jsdoc-mode-add-console-log)
+  (local-set-key "\C-c\C-e" 'jsdoc-mode-add-case-log)
   (local-set-key "\C-cj" 'jsdoc-mode-make-80-character-lines)
   ;;(local-set-key [return] 'js2-line-break)
   ;;(local-set-key "\M-k" 'kill-sexp)
