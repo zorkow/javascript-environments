@@ -169,7 +169,7 @@
          )
     (beginning-of-line)
     (insert "\n/**\n * \n")
-    (do* ((pairs pairs (cdr pairs))
+    (do* ((pairs (reverse pairs) (cdr pairs))
           (pair (car pairs) (car pairs)))
         ((null pairs))
       (when (cadr pair)
