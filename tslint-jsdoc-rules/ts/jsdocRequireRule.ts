@@ -34,13 +34,15 @@ export class Rule extends Lint.Rules.AbstractRule {
             * \`"no-properties"\` excludes JSDoc comments on class properties
             * \`"no-functions"\` excludes JSDoc comments on all functions
             * \`"no-protected"\` excludes JSDoc comments on protected elements
+            * \`"no-namespace-functions"\` excludes JSDoc comments on namespace function assignments
             * \`"no-private"\` excludes JSDoc comments on private elements
             * \`"no-private-properties"\` excludes private properties from enforcing JSDoc comments.`,
         options: {
             type: "array",
             items: {
                 type: "string",
-              enum: ["methods", "properties", "functions", "protected", "public", "no-private-properties"],
+              enum: ["methods", "properties", "functions", "protected", "public",
+                     "namespace-functions", "no-private-properties"],
             },
             minLength: 0,
             maxLength: 6,
@@ -68,6 +70,16 @@ export class JsdocCommentsWalker extends Lint.RuleWalker {
     }
     super.visitConstructorDeclaration(node);
   }
+
+  public visitExpressionStatement(node: ts.ExpressionStatement) {
+        if (!this.hasOption("no-namespace-functions") &&
+            node.expression.kind === ts.SyntaxKind.BinaryExpression &&
+            node.expression.left.kind === ts.SyntaxKind.PropertyAccessExpression &&
+            node.expression.right.kind === ts.SyntaxKind.FunctionExpression) {
+          this.validateJsDocComment(node);
+        }
+        _super.prototype.visitConstructorDeclaration.call(this, node);
+    };
 
   public visitMethodSignature(node: ts.SignatureDeclaration) {
     if (!this.hasOption("no-methods")) {
@@ -120,6 +132,9 @@ export class JsdocCommentsWalker extends Lint.RuleWalker {
     let memberType: string;
 
     switch (node.kind) {
+    case ts.SyntaxKind.ExpressionStatement:
+      memberType = "namespace function declaration";
+      break;
     case ts.SyntaxKind.MethodSignature:
       memberType = "interface declaration";
       break;
