@@ -1,9 +1,9 @@
 {
   "name": "tslint-jsdoc-rules",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Rules for tslint to enforce JSDoc in sources.",
   "scripts": {
-    "prepublish": "tsc"
+    "prepublishOnly": "node_modules/.bin/tsc"
   },
   "maintainers": [
     "Volker Sorge <Volker.Sorge@gmail.com> (http://www.cs.bham.ac.uk/~vxs)"
@@ -31,9 +31,9 @@
     "tslint": "^3.2.2"
   },
   "files": [
-      "LICENSE",
-      "README.md",
-      "lib/"
+    "LICENSE",
+    "README.md",
+    "lib/"
   ],
   "main": "lib/jsdocRequireRule.js"
 }
