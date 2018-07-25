@@ -72,14 +72,14 @@ export class JsdocCommentsWalker extends Lint.RuleWalker {
   }
 
   public visitExpressionStatement(node: ts.ExpressionStatement) {
-        if (!this.hasOption("no-namespace-functions") &&
-            node.expression.kind === ts.SyntaxKind.BinaryExpression &&
-            node.expression.left.kind === ts.SyntaxKind.PropertyAccessExpression &&
-            node.expression.right.kind === ts.SyntaxKind.FunctionExpression) {
-          this.validateJsDocComment(node);
-        }
-        _super.prototype.visitConstructorDeclaration.call(this, node);
-    };
+    if (!this.hasOption("no-namespace-functions") &&
+        node.expression.kind === ts.SyntaxKind.BinaryExpression &&
+        (node.expression as ts.BinaryExpression).left.kind === ts.SyntaxKind.PropertyAccessExpression &&
+        (node.expression as ts.BinaryExpression).right.kind === ts.SyntaxKind.FunctionExpression) {
+      this.validateJsDocComment(node);
+    }
+    super.visitConstructorDeclaration.call(this, node);
+  }
 
   public visitMethodSignature(node: ts.SignatureDeclaration) {
     if (!this.hasOption("no-methods")) {
