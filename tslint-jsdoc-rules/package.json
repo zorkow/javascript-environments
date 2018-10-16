@@ -15,14 +15,14 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules"
+    "url": "https://github.com/zorkow/javascript-environments/tree/master/tslint-jsdoc-rules"
   },
   "keywords": [
     "tslint",
     "rules",
     "jsdoc"
   ],
-  "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
+  "homepage": "https://github.com/zorkow/javascript-environments/tree/master/tslint-jsdoc-rules",
   "dependencies": {
     "tslint": "^3.2.2"
   },
