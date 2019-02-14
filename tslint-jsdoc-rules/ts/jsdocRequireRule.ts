@@ -17,7 +17,7 @@
 
 import * as ts from "typescript";
 
-import * as Lint from "tslint/lib/lint";
+import * as Lint from "tslint/lib/index";
 
 export class Rule extends Lint.Rules.AbstractRule {
     /* tslint:disable:object-literal-sort-keys */
@@ -49,6 +49,7 @@ export class Rule extends Lint.Rules.AbstractRule {
         },
         optionExamples: ["true", '[true, "methods", "protected"]'],
         type: "typescript",
+        typescriptOnly: false
     };
     /* tslint:enable:object-literal-sort-keys */
 
