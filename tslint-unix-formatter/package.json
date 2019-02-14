@@ -1,6 +1,6 @@
 {
   "name": "tslint-unix-formatter",
-  "version": "0.1.5",
+  "version": "0.2.0",
   "description": "A formatter with error output in UNIX style for tslint.",
   "scripts": {
     "prepublish": "tsc"
@@ -23,16 +23,16 @@
   ],
   "homepage": "https://github.com/zorkow/javascript-environments/tslint-unix-formatter",
   "dependencies": {
-    "tslint": "^3.2.2"
+    "tslint": "^5.*"
   },
   "devDependencies": {
-    "typescript": "^1.7.5",
-    "tslint": "^3.2.2"
+    "@types/node": "^11.9.3",
+    "typescript": "^3.*"
   },
   "files": [
-      "LICENSE",
-      "README.md",
-      "lib/"
+    "LICENSE",
+    "README.md",
+    "lib/"
   ],
   "main": "lib/index.js"
 }
