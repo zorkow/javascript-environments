@@ -41,8 +41,6 @@
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
               (setq flycheck-typescript-tslint-executable (tslint-binary))
-              ;; setup the linter.
-              (flycheck-typescript-tslint-setup)
               (eldoc-mode +1)
               (tss-setup-current-buffer)
               (jsdoc-local-mode-map)
