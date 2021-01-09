@@ -39,7 +39,7 @@
               (tide-setup)
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
-              (setq flycheck-typescript-tslint-executable (eslint-binary))
+              (setq flycheck-typescript-tslint-executable (tslint-binary))
               (eldoc-mode +1)
               (tss-setup-current-buffer)
               (jsdoc-local-mode-map)
