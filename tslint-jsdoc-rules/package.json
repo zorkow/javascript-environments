@@ -24,7 +24,7 @@
   ],
   "homepage": "https://github.com/zorkow/javascript-environments/tslint-jsdoc-rules",
   "dependencies": {
-    "tslint": "^5.*"
+    "tslint": "^6.*"
   },
   "devDependencies": {
     "@types/node": "^11.9.3",

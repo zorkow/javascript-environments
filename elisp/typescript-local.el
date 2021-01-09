@@ -26,7 +26,7 @@
 
 (load-library "jsdoc-helpers")
 (load-library "nodejs-helpers")
-(load-library "jsdoc-highlighter")
+;; (load-library "jsdoc-highlighter")
 ;;
 ;; Some TypeScript extensions
 ;;
@@ -37,16 +37,20 @@
               ;;(setq font-lock-comment-face 'font-lock-string-face)
               (setq typescript-indent-level 2)
               (tide-setup)
-              (flymake-mode)
               (flycheck-mode +1)
               (setq flycheck-check-syntax-automatically '(save mode-enabled))
-              (setq flycheck-typescript-tslint-executable (tslint-binary))
+              (setq flycheck-typescript-tslint-executable (eslint-binary))
               (eldoc-mode +1)
               (tss-setup-current-buffer)
               (jsdoc-local-mode-map)
               (typescript-local-mode-map)
               (node-js-local-mode-map)
               ))
+
+(add-hook 'typescript-mode-local-vars-hook
+          (lambda ()
+            (eslint-set-executable)
+            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)))
 
 (defconst typescript-local-executable "tsc")
 (defconst tslint-executable "tslint")
@@ -60,8 +64,10 @@
 
 (defvar tss-local-path-extended nil)
 (defun tss-local-extend-path ()
+  (print "HERE")
   (when (not tss-local-path-extended)
     (let ((nodemodules (typescript-local-nodemodules)))
+      (print nodemodules)
       (when (and nodemodules (file-exists-p (concat nodemodules "typescript-tools/bin/tss")))
         (push (concat nodemodules "typescript-tools/bin/") exec-path)
         (setq tss-local-path-extended t)))))
@@ -97,6 +103,19 @@
   (interactive)
   (let ((src-directory (file-name-directory (buffer-file-name))))
     (compile (format "%s %s %s/*.ts" (tslint-binary) (tslint-options) src-directory) nil)
+    ))
+
+(defun eslint-buffer ()
+  (interactive)
+  (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json"))
+         (file (file-relative-name (buffer-file-name) dir)))
+    (compile (format "cd %s; %s --format unix --ext ts %s" dir (eslint-binary) file) nil)
+  ))
+
+(defun eslint-package ()
+  (interactive)
+  (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json")))
+    (compile (format "cd %s; %s --format unix --ext ts ." dir (eslint-binary)))
     ))
 
 (defun typescript-local-compile ()
@@ -188,25 +207,27 @@
     (jsdoc-mode-indent-region (+ count 3) 1 0))
   ))
 
+
 (defun typescript-local-type-comment ()
   (interactive)
-  (let ((regexp "\\(const\\)\\|\\(public\\)\\|\\(private\\)\\|\\(protected\\)"))
+  (let ((regexp "\\(public\\)\\|\\(private\\)\\|\\(protected\\)\\|\\(let\\)"))
     (search-forward-regexp regexp)
     (search-forward ":")
-    
     (let* ((start (point))
            (stop (progn
-                   (search-forward-regexp "\\(=\\)\\|\\(;\\)")
+                   (backward-char 1)
+                   (search-forward-regexp "\\(;\\|=\\)")
                    (point)))
-           (selection (buffer-substring-no-properties start (- stop 1)))
-           )
-      (search-backward-regexp regexp)
-      (forward-char 1)
-      (beginning-of-line)
-    (insert (concat "\n/**\n * \n * @type {" (string-trim selection) "}\n */\n"))
-    (jsdoc-mode-indent-region 4 1 1)
-    (end-of-line)
-    )))
+           (type (string-trim (buffer-substring-no-properties start (- stop 1)))))
+    (search-backward-regexp regexp)
+    (forward-char 1)
+    (beginning-of-line)
+    (insert "\n/**\n * \n")
+    (insert (concat " * @type {" (string-trim type) "}\n")))
+    (insert " */\n")
+    (jsdoc-mode-indent-region 4 1 0))
+  )
+
 
 (defun typescript-local-mode-map ()
   (local-set-key "\C-c\C-c" 'typescript-local-compile)
@@ -216,3 +237,13 @@
   (local-set-key "\C-ct" 'typescript-local-type-comment)
   )
 
+
+(defun eslint-binary ()
+  (let ((nodemodules (typescript-local-nodemodules)))
+    (if nodemodules
+        (concat nodemodules ".bin/eslint")
+      "eslint")))
+
+(defun eslint-set-executable ()
+  (setq-local flycheck-javascript-eslint-executable (esline-binary))
+  )
