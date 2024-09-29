@@ -22,6 +22,8 @@
 (autoload 'js2-mode "js2-mode" nil t)
 ;;(load-library "js2-mode")
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.mjs$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.cjs$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 (load-library "jsdoc-helpers")
 (load-library "nodejs-helpers")
@@ -93,4 +95,4 @@
 
 (setq js-indent-level 2)
 
-(load-library "closure-glslint")
+;; (load-library "closure-glslint")

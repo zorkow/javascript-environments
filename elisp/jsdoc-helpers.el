@@ -40,7 +40,7 @@
 
 (defun jsdoc-mode-function-comment ()
   (interactive)
-  (insert "\n/**\n * \n * @param {}\n * @return {}\n */\n")
+  (insert "\n/**\n * \n * @param {}\n * @returns {}\n */\n")
   (jsdoc-mode-indent-region 5 1 0))
 
 
@@ -68,6 +68,14 @@
   (interactive)
   (end-of-line)
   (insert "\n * @param {}")
+  (indent-for-tab-command)
+  (backward-char 1)
+  )
+
+(defun jsdoc-mode-add-returns-comment ()
+  (interactive)
+  (end-of-line)
+  (insert "\n * @returns {}")
   (indent-for-tab-command)
   (backward-char 1)
   )
@@ -153,6 +161,7 @@ Plain `C-u' (no number) uses `fill-column' as LEN."
   (local-set-key "\C-co" 'jsdoc-mode-override-comment)
   (local-set-key "\C-ct" 'jsdoc-mode-type-comment)
   (local-set-key "\M-\r" 'jsdoc-mode-add-parameter-comment)
+  (local-set-key [C-M-return] 'jsdoc-mode-add-returns-comment)
   (local-set-key [C-return] 'js2-line-break)
   (local-set-key "\C-c\C-d" 'jsdoc-mode-add-console-log)
   (local-set-key "\C-c\C-e" 'jsdoc-mode-add-case-log)
