@@ -25,7 +25,7 @@
                  ("\\.tsx$" . typescript-mode))
                auto-mode-alist))
 
-(load-library "cl")
+(load-library "cl-lib")
 (load-library "jsdoc-helpers")
 (load-library "nodejs-helpers")
 ;; (load-library "jsdoc-highlighter")
