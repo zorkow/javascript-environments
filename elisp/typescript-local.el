@@ -120,7 +120,7 @@
   (interactive)
   (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json"))
          (file (file-relative-name (buffer-file-name) dir))
-         (subdir (subseq file 0 (search "/" file)))
+         (subdir (seq-subseq file 0 (string-match "/" file)))
          )
     (compile (format "cd %s; %s --format unix %s" dir (eslint-binary) subdir))
     ))
@@ -129,7 +129,9 @@
   (interactive)
   (let* ((dir (locate-dominating-file (buffer-file-name) "tsconfig.json"))
          (file (file-relative-name (buffer-file-name) dir))
-         (subdir (subseq file 0 (search "/" file :from-end t)))
+         (subdir (seq-subseq file 0 (with-temp-buffer
+                                      (insert file)
+                                      (search-backward "/" nil t))))
          )
     (compile (format "cd %s; %s --format unix %s" dir (eslint-binary) subdir))
     ))
@@ -172,7 +174,7 @@
         (let ((out (gethash "\"out\"" (cadr compilerOptions))))
           (when out
             (let ((str (cadr out)))
-              (subseq str 1 (1- (length str))))))))))
+              (seq-subseq str 1 (1- (length str))))))))))
 
 
 (defun jslint-typescript-buffer ()
@@ -192,32 +194,33 @@
                    (point)))
            (selection (buffer-substring-no-properties start (- stop 1)))
            (params (split-string selection ","))
-           (pairs (do* ((params params (cdr params))
-                        param)
-                      ((null params) param)
-                    (push (split-string (car params) ":") param)
-                    ))
+           (pairs (cl-loop for param in params
+                           collect (split-string param ":")))
            (count 0)
            (brace (progn
                     (search-forward "{")
                     (point)))
            (type (string-trim (buffer-substring-no-properties stop (- brace 1))))
            (result (when (> (length type) 0)
-                     (string-trim (subseq type 1))))
+                     (string-trim (seq-subseq type 1))))
            )
     (search-backward-regexp regexp)
     (forward-char 1)
     (beginning-of-line)
     (insert "\n/**\n * \n")
-    (do* ((pairs (reverse pairs) (cdr pairs))
-          (pair (car pairs) (car pairs)))
-        ((null pairs))
-      (when (cadr pair)
-        (incf count)
-        (insert (concat " * @param {" (string-trim (mapconcat 'identity (cdr pair) ":")) "} "
-                        (string-trim (car pair)) " \n"))))
+    (let ((pairs (reverse pairs))
+          (count 0))
+      (cl-loop for pair in pairs
+               if (cadr pair)  ;; Check if the second element of the pair exists
+               do (progn
+                (cl-incf count)  ;; Increment the count
+                (insert (concat " * @param {" 
+                                (string-trim (mapconcat 'identity (cdr pair) ":")) 
+                                "} " 
+                                (string-trim (car pair)) 
+                                " \n")))))
     (when (> (length result) 0)
-        (incf count)
+        (cl-incf count)
         (insert (concat " * @returns {" result "} \n")))
     (insert " */\n")
     (jsdoc-mode-indent-region (+ count 3) 1 0))

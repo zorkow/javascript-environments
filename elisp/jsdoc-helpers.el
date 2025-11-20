@@ -96,7 +96,7 @@
   (beginning-of-line)
   (open-line 1)
   (insert (format "console.log(%s);" jsdoc-mode-case-log-counter))
-  (incf jsdoc-mode-case-log-counter)
+  (cl-incf jsdoc-mode-case-log-counter)
   (indent-for-tab-command)
   (forward-line 1)
   (indent-for-tab-command)
